@@ -23,7 +23,6 @@
  */
 package org.takes.tk;
 
-import java.io.InputStream;
 import java.net.URL;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -88,21 +87,6 @@ public final class TkHTML extends TkWrap {
                 @Override
                 public Response act(final Request req) {
                     return new RsHTML(url);
-                }
-            }
-        );
-    }
-
-    /**
-     * Ctor.
-     * @param body Content
-     */
-    public TkHTML(final InputStream body) {
-        super(
-            new Take() {
-                @Override
-                public Response act(final Request req) {
-                    return new RsHTML(body);
                 }
             }
         );

@@ -23,7 +23,6 @@
  */
 package org.takes.rs;
 
-import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import lombok.EqualsAndHashCode;
@@ -78,14 +77,6 @@ public final class RsHTML extends RsWrap {
 
     /**
      * Ctor.
-     * @param body HTML body
-     */
-    public RsHTML(final InputStream body) {
-        this(new RsEmpty(), body);
-    }
-
-    /**
-     * Ctor.
      * @param res Original response
      * @param body HTML body
      */
@@ -99,15 +90,6 @@ public final class RsHTML extends RsWrap {
      * @param body HTML body
      */
     public RsHTML(final Response res, final byte[] body) {
-        this(new RsWithBody(res, body));
-    }
-
-    /**
-     * Ctor.
-     * @param res Original response
-     * @param body HTML body
-     */
-    public RsHTML(final Response res, final InputStream body) {
         this(new RsWithBody(res, body));
     }
 

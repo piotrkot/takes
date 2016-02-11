@@ -92,7 +92,12 @@ public final class BkBasic implements Back {
      * @param output Output
      * @throws IOException If fails
      */
-    @SuppressWarnings("PMD.AvoidCatchingThrowable")
+    @SuppressWarnings
+        (
+            {
+                "PMD.AvoidCatchingThrowable",
+                "PMD.EmptyCatchBlock"
+            })
     private void print(final Request req, final OutputStream output)
         throws IOException {
         try {
@@ -108,7 +113,12 @@ public final class BkBasic implements Back {
                 )
             ).print(output);
         } finally {
-            output.close();
+            try {
+                output.close();
+            } catch (final IOException ex) {
+                // @checkstyle MethodBodyComments (1 line)
+                // Ignore exception for empty request.
+            }
         }
     }
 
