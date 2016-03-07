@@ -33,8 +33,9 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
+import java.util.SortedMap;
+import java.util.TreeMap;
+import java.util.regex.Pattern;
 
 /**
  * HTTP URI/HREF.
@@ -54,6 +55,11 @@ import java.util.concurrent.ConcurrentMap;
 public final class Href implements CharSequence {
 
     /**
+     * Pattern matching trailing slash.
+     */
+    private static final Pattern TRAILING_SLASH = Pattern.compile("/$");
+
+    /**
      * URI (without the query part).
      */
     private final transient URI uri;
@@ -61,7 +67,7 @@ public final class Href implements CharSequence {
     /**
      * Params.
      */
-    private final transient ConcurrentMap<String, List<String>> params;
+    private final transient SortedMap<String, List<String>> params;
 
     /**
      * Ctor.
@@ -73,44 +79,17 @@ public final class Href implements CharSequence {
     /**
      * Ctor.
      * @param txt Text of the link
-     * @todo #558:30min Href ctor. According to new qulice version, constructor
-     *  must contain only variables initialization and other constructor calls.
-     *  Refactor code according to that rule and remove
-     *  `ConstructorOnlyInitializesOrCallOtherConstructors`
-     *  warning suppression.
      */
-    @SuppressWarnings
-        (
-            {
-                "PMD.AvoidInstantiatingObjectsInLoops",
-                "PMD.ConstructorOnlyInitializesOrCallOtherConstructors"
-            }
-        )
     public Href(final CharSequence txt) {
-        this.params = new ConcurrentHashMap<String, List<String>>(0);
-        final URI link = Href.createURI(txt.toString());
-        final String query = link.getRawQuery();
-        if (query == null) {
-            this.uri = link;
-        } else {
-            final String href = link.toString();
-            this.uri = URI.create(
-                href.substring(0, href.length() - query.length() - 1)
-            );
-            final String[] pairs = query.split("&");
-            for (final String pair : pairs) {
-                final String[] parts = pair.split("=", 2);
-                final String key = Href.decode(parts[0]);
-                final String value;
-                if (parts.length > 1) {
-                    value = Href.decode(parts[1]);
-                } else {
-                    value = "";
-                }
-                this.params.putIfAbsent(key, new LinkedList<String>());
-                this.params.get(key).add(value);
-            }
-        }
+        this(Href.createURI(txt.toString()));
+    }
+
+    /**
+     * Ctor.
+     * @param link The link
+     */
+    private Href(final URI link) {
+        this(Href.removeQuery(link), Href.asMap(link.getRawQuery()));
     }
 
     /**
@@ -119,7 +98,7 @@ public final class Href implements CharSequence {
      * @param map Map of params
      */
     private Href(final URI link,
-        final ConcurrentMap<String, List<String>> map) {
+        final SortedMap<String, List<String>> map) {
         this.uri = link;
         this.params = map;
     }
@@ -222,9 +201,12 @@ public final class Href implements CharSequence {
     public Href path(final Object suffix) {
         return new Href(
             URI.create(
-                new StringBuilder(this.uri.toString().replaceAll("/$", ""))
-                    .append('/')
-                    .append(Href.encode(suffix.toString())).toString()
+                new StringBuilder(
+                    Href.TRAILING_SLASH.matcher(this.uri.toString())
+                        .replaceAll("")
+                )
+                .append('/')
+                .append(Href.encode(suffix.toString())).toString()
             ),
             this.params
         );
@@ -237,12 +219,11 @@ public final class Href implements CharSequence {
      * @return New HREF
      */
     public Href with(final Object key, final Object value) {
-        final ConcurrentMap<String, List<String>> map =
-            new ConcurrentHashMap<String, List<String>>(
-                this.params.size() + 1
-            );
-        map.putAll(this.params);
-        map.putIfAbsent(key.toString(), new LinkedList<String>());
+        final SortedMap<String, List<String>> map =
+            new TreeMap<String, List<String>>(this.params);
+        if (!map.containsKey(key.toString())) {
+            map.put(key.toString(), new LinkedList<String>());
+        }
         map.get(key.toString()).add(value.toString());
         return new Href(this.uri, map);
     }
@@ -253,11 +234,8 @@ public final class Href implements CharSequence {
      * @return New HREF
      */
     public Href without(final Object key) {
-        final ConcurrentMap<String, List<String>> map =
-            new ConcurrentHashMap<String, List<String>>(
-                this.params.size()
-            );
-        map.putAll(this.params);
+        final SortedMap<String, List<String>> map =
+            new TreeMap<String, List<String>>(this.params);
         map.remove(key.toString());
         return new Href(this.uri, map);
     }
@@ -322,5 +300,52 @@ public final class Href implements CharSequence {
             result = Href.createURI(value.toString());
         }
         return result;
+    }
+
+    /**
+     * Convert the provided query into a Map.
+     * @param query The query to parse.
+     * @return A map containing all the query arguments and their values.
+     */
+    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
+    private static SortedMap<String, List<String>> asMap(final String query) {
+        final SortedMap<String, List<String>> params = new TreeMap<>();
+        if (query != null) {
+            for (final String pair : query.split("&")) {
+                final String[] parts = pair.split("=", 2);
+                final String key = Href.decode(parts[0]);
+                final String value;
+                if (parts.length > 1) {
+                    value = Href.decode(parts[1]);
+                } else {
+                    value = "";
+                }
+                if (!params.containsKey(key)) {
+                    params.put(key, new LinkedList<String>());
+                }
+                params.get(key).add(value);
+            }
+        }
+        return params;
+    }
+
+    /**
+     * Remove the query part from the provided URI and return the resulting URI.
+     * @param link The link from which the query needs to be removed.
+     * @return The URI corresponding to the same provided URI but without the
+     *  query part.
+     */
+    private static URI removeQuery(final URI link) {
+        final String query = link.getRawQuery();
+        final URI uri;
+        if (query == null) {
+            uri = link;
+        } else {
+            final String href = link.toString();
+            uri = URI.create(
+                href.substring(0, href.length() - query.length() - 1)
+            );
+        }
+        return uri;
     }
 }

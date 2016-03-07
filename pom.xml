@@ -29,7 +29,7 @@
     <parent>
         <groupId>com.jcabi</groupId>
         <artifactId>parent</artifactId>
-        <version>0.40.1</version>
+        <version>0.42</version>
     </parent>
     <groupId>org.takes</groupId>
     <artifactId>takes</artifactId>
@@ -85,6 +85,7 @@
     </distributionManagement>
     <properties>
         <timestamp>${maven.build.timestamp}</timestamp>
+        <jdk.version>1.7</jdk.version>
     </properties>
     <dependencies>
         <!--
@@ -280,6 +281,14 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-compiler-plugin</artifactId>
+               <configuration>
+                   <source>${jdk.version}</source>
+                   <target>${jdk.version}</target>
+               </configuration>
+            </plugin>
         </plugins>
     </build>
     <profiles>
@@ -304,55 +313,30 @@
                     <plugin>
                         <groupId>com.qulice</groupId>
                         <artifactId>qulice-maven-plugin</artifactId>
-                         <!--
-                         @todo #558:30min Upgrade Qulice to 0.16. Fix all checkstyle
-                          violations (mostly `AtclauseOrderCheck`). Fix or add puzzle for 
-                          PMD, findbugs and other types of violations. 
-                         -->
-                        <version>0.15.4</version>
+                        <version>0.16</version>
                         <configuration>
                             <excludes combine.children="append">
                                 <exclude>checkstyle:/src/site/resources/.*</exclude>
                                 <!--
-                                @todo #517:30min Continue fixing FindBugs violations started in #517.
-                                 #517 turned on the FindBugs, temporarily excluding some classes.
+                                @todo #574:30min Continue fixing FindBugs violations started in #574.
+                                 #574 turned on the FindBugs, temporarily excluding some classes.
                                  Remove all excludes of FindBugs below and fix the issues.
                                 -->
-                                <exclude>findbugs:org.takes.HttpException</exclude>
-                                <exclude>findbugs:org.takes.facets.fallback.FbLog4j</exclude>
-                                <exclude>findbugs:org.takes.facets.fallback.FbSlf4j</exclude>
-                                <exclude>findbugs:org.takes.facets.fallback</exclude>
-                                <exclude>findbugs:org.takes.facets.fork.FkRegex$2</exclude>
-                                <exclude>findbugs:org.takes.facets.fork.FkRegex</exclude>
-                                <exclude>findbugs:org.takes.facets.forward.RsForward</exclude>
-                                <exclude>findbugs:org.takes.facets.forward.RsForward</exclude>
                                 <exclude>findbugs:org.takes.facets.forward.TkForward$Safe</exclude>
-                                <exclude>findbugs:org.takes.facets.forward</exclude>
-                                <exclude>findbugs:org.takes.http.BkBasic</exclude>
-                                <exclude>findbugs:org.takes.http.FtCLI$3</exclude>
-                                <exclude>findbugs:org.takes.http.FtCLI</exclude>
-                                <exclude>findbugs:org.takes.http.MainRemote$1</exclude>
-                                <exclude>findbugs:org.takes.http.MainRemote</exclude>
-                                <exclude>findbugs:org.takes.http.MainRemote</exclude>
-                                <exclude>findbugs:org.takes.http.Options</exclude>
-                                <exclude>findbugs:org.takes.rq.RqForm$Base</exclude>
-                                <exclude>findbugs:org.takes.rq.RqMultipart$Base</exclude>
-                                <exclude>findbugs:org.takes.rq.RqMultipart$Base</exclude>
                                 <exclude>findbugs:org.takes.rs.RsGzip</exclude>
+                                <exclude>findbugs:org.takes.rq.RqForm$Base</exclude>
                                 <exclude>findbugs:org.takes.rs.RsPrettyJSON</exclude>
                                 <exclude>findbugs:org.takes.rs.RsPrettyXML</exclude>
-                                <exclude>findbugs:org.takes.rs.RsWithHeader</exclude>
-                                <exclude>findbugs:org.takes.rs.RsXSLT</exclude>
                                 <exclude>findbugs:org.takes.tk.TkReadAlways</exclude>
+                                <exclude>findbugs:org.takes.HttpException</exclude>
+                                <exclude>findbugs:org.takes.facets.forward.RsForward</exclude>
+                                <exclude>findbugs:org.takes.facets.fork.FkRegex$2</exclude>
+                                <exclude>findbugs:org.takes.http.FtCLI$3</exclude>
+                                <exclude>findbugs:org.takes.http.MainRemote$1</exclude>
+                                <exclude>findbugs:org.takes.http.MainRemote</exclude>
+                                <exclude>findbugs:org.takes.rq.RqMultipart$Base</exclude>
+                                <exclude>findbugs:org.takes.http.Options</exclude>
                             </excludes>
-                        </configuration>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-compiler-plugin</artifactId>
-                        <configuration>
-                            <source>1.7</source>
-                            <target>1.7</target>
                         </configuration>
                     </plugin>
                 </plugins>
