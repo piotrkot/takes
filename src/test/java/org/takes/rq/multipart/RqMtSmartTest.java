@@ -171,7 +171,7 @@ public final class RqMtSmartTest {
         try {
             MatcherAssert.assertThat(
                 regsmart.single(part).body().available(),
-                Matchers.equalTo(length)
+                Matchers.equalTo(length + RqMtSmartTest.CRLF.length())
             );
         } finally {
             req.body().close();

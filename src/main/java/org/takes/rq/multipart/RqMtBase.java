@@ -281,6 +281,7 @@ public final class RqMtBase implements RqMultipart {
      * @throws IOException If fails
      * @checkstyle ExecutableStatementCountCheck (2 lines)
      */
+    @SuppressWarnings("PMD.CyclomaticComplexity")
     private void copy(final WritableByteChannel target,
         final byte[] boundary, final ReadableByteChannel body)
         throws IOException {
