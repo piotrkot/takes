@@ -23,7 +23,6 @@
  */
 package org.takes.http;
 
-import java.io.IOException;
 import java.net.Socket;
 import lombok.EqualsAndHashCode;
 
@@ -47,7 +46,7 @@ public class BkWrap implements Back {
     }
 
     @Override
-    public final void accept(final Socket socket) throws IOException {
+    public final void accept(final Socket socket) throws Exception {
         this.origin.accept(socket);
     }
 

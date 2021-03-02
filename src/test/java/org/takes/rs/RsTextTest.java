@@ -61,10 +61,10 @@ final class RsTextTest {
 
     /**
      * RsText can build a response with a status.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    void makesTextResponseWithStatus() throws IOException {
+    void makesTextResponseWithStatus() throws Exception {
         MatcherAssert.assertThat(
             new RsPrint(
                 new RsText(

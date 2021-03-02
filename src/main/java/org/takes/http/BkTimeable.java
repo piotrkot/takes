@@ -23,7 +23,6 @@
  */
 package org.takes.http;
 
-import java.io.IOException;
 import java.net.Socket;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -81,7 +80,7 @@ public final class BkTimeable extends Thread implements Back {
     }
 
     @Override
-    public void accept(final Socket socket) throws IOException {
+    public void accept(final Socket socket) throws Exception {
         this.threads.put(
             Thread.currentThread(),
             System.currentTimeMillis()

@@ -23,7 +23,6 @@
  */
 package org.takes.http;
 
-import java.io.IOException;
 import java.util.Arrays;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
@@ -88,7 +87,8 @@ public final class FtCli implements Front {
     }
 
     @Override
-    public void start(final Exit exit) throws IOException {
+    @SuppressWarnings("PMD.AvoidCatchingGenericException")
+    public void start(final Exit exit) throws Exception {
         final Take tks;
         if (this.options.hitRefresh()) {
             tks = new Take() {
@@ -124,7 +124,8 @@ public final class FtCli implements Front {
                     public void run() {
                         try {
                             front.start(FtCli.this.exit(exit));
-                        } catch (final IOException ex) {
+                            // @checkstyle IllegalCatch (1 line)
+                        } catch (final Exception ex) {
                             throw new IllegalStateException(ex);
                         }
                     }

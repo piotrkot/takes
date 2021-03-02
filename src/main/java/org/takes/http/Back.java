@@ -23,7 +23,6 @@
  */
 package org.takes.http;
 
-import java.io.IOException;
 import java.net.Socket;
 
 /**
@@ -38,8 +37,8 @@ public interface Back {
     /**
      * Accept and dispatch this socket.
      * @param socket TCP socket with HTTP
-     * @throws IOException If fails
+     * @throws Exception If fails
      */
-    void accept(Socket socket) throws IOException;
+    void accept(Socket socket) throws Exception;
 
 }

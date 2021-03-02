@@ -23,7 +23,6 @@
  */
 package org.takes.rs.xe;
 
-import java.io.IOException;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.rq.RqHref;
@@ -47,7 +46,7 @@ public final class XeLinkHome extends XeWrap {
         super(
             new XeSource() {
                 @Override
-                public Iterable<Directive> toXembly() throws IOException {
+                public Iterable<Directive> toXembly() throws Exception {
                     return new XeLink(
                         "home",
                         new RqHref.Smart(new RqHref.Base(req)).home()

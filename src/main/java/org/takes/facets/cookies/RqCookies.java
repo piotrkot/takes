@@ -49,9 +49,9 @@ public interface RqCookies extends Request {
      * Get single cookie.
      * @param name Cookie name
      * @return List of values (can be empty)
-     * @throws IOException If fails
+     * @throws Exception If fails
      */
-    Iterable<String> cookie(CharSequence name) throws IOException;
+    Iterable<String> cookie(CharSequence name) throws Exception;
 
     /**
      * Get all cookie names.
@@ -78,7 +78,7 @@ public interface RqCookies extends Request {
 
         @Override
         public Iterable<String> cookie(final CharSequence key)
-            throws IOException {
+            throws Exception {
             final Map<String, String> map = this.map();
             final String value = map.getOrDefault(
                 new UncheckedText(

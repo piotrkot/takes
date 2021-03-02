@@ -23,7 +23,6 @@
  */
 package org.takes.rq.form;
 
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URLDecoder;
@@ -79,7 +78,7 @@ public final class RqFormBase extends RqWrap implements RqForm {
 
     @Override
     public Iterable<String> param(final CharSequence key)
-        throws IOException {
+        throws Exception {
         final List<String> values = this.map().getOrDefault(
             new UncheckedText(
                 new Lowered(key.toString())
@@ -108,7 +107,7 @@ public final class RqFormBase extends RqWrap implements RqForm {
     }
 
     @Override
-    public Iterable<String> names() throws IOException {
+    public Iterable<String> names() throws Exception {
         return this.map().keySet();
     }
 
@@ -131,9 +130,9 @@ public final class RqFormBase extends RqWrap implements RqForm {
     /**
      * Create map of request parameters.
      * @return Parameters map or empty map in case of error.
-     * @throws IOException If something fails reading or parsing body
+     * @throws Exception If something fails reading or parsing body
      */
-    private Map<String, List<String>> map() throws IOException {
+    private Map<String, List<String>> map() throws Exception {
         if (this.saved.isEmpty()) {
             this.saved.add(this.freshMap());
         }
@@ -143,9 +142,9 @@ public final class RqFormBase extends RqWrap implements RqForm {
     /**
      * Create map of request parameter.
      * @return Parameters map or empty map in case of error.
-     * @throws IOException If something fails reading or parsing body
+     * @throws Exception If something fails reading or parsing body
      */
-    private Map<String, List<String>> freshMap() throws IOException {
+    private Map<String, List<String>> freshMap() throws Exception {
         final String body = new RqPrint(this.req).printBody();
         final Map<String, List<String>> map = new HashMap<>(1);
         // @checkstyle MultipleStringLiteralsCheck (1 line)

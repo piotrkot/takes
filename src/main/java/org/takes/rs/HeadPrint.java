@@ -67,9 +67,9 @@ public final class HeadPrint implements Head, Text {
      * Print it into output stream in UTF8.
      *
      * @param output Output to print into
-     * @throws IOException If fails
+     * @throws Exception If fails
      */
-    public void print(final OutputStream output) throws IOException {
+    public void print(final OutputStream output) throws Exception {
         try {
             output.write(this.asString().getBytes(StandardCharsets.UTF_8));
         } finally {
@@ -78,7 +78,7 @@ public final class HeadPrint implements Head, Text {
     }
 
     @Override
-    public String asString() throws IOException {
+    public String asString() throws Exception {
         return new FormattedText(
             "%s%s%s",
             new Joined(

@@ -24,7 +24,6 @@
 package org.takes.rq;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -39,10 +38,10 @@ final class RqGreedyTest {
 
     /**
      * RqGreedy can make request greedy.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    void makesRequestGreedy() throws IOException {
+    void makesRequestGreedy() throws Exception {
         final String body = new Joined(
             "\r\n",
             "GET /test HTTP/1.1",

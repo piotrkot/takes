@@ -56,10 +56,10 @@ public final class RqMtFake implements RqMultipart {
      * Fake ctor.
      * @param req Fake request header holder
      * @param dispositions Fake request body parts
-     * @throws IOException If fails
+     * @throws Exception If fails
      */
     public RqMtFake(final Request req, final Request... dispositions)
-        throws IOException {
+        throws Exception {
         this.fake = new RqMtBase(
             new RqMtFake.FakeMultipartRequest(req, dispositions)
         );
@@ -89,7 +89,7 @@ public final class RqMtFake implements RqMultipart {
      * Fake body creator.
      * @param parts Fake request body parts
      * @return StringBuilder of given dispositions
-     * @throws IOException If fails
+     * @throws Exception If fails
      */
     @SuppressWarnings(
         {
@@ -97,7 +97,7 @@ public final class RqMtFake implements RqMultipart {
             "PMD.AvoidInstantiatingObjectsInLoops"
         })
     private static StringBuilder fakeBody(final Request... parts)
-        throws IOException {
+        throws Exception {
         final StringBuilder builder = new StringBuilder();
         for (final Request part : parts) {
             builder.append(String.format("--%s", RqMtFake.BOUNDARY))
@@ -141,10 +141,10 @@ public final class RqMtFake implements RqMultipart {
          * The Constructor for the class.
          * @param rqst The Request object
          * @param list The sequence of dispositions
-         * @throws IOException if can't process requests
+         * @throws Exception if can't process requests
          */
         FakeMultipartRequest(final Request rqst, final Request... list)
-            throws IOException {
+            throws Exception {
             this.req = rqst;
             this.parts = RqMtFake.fakeBody(list).toString();
         }

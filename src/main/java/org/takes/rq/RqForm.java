@@ -23,7 +23,6 @@
  */
 package org.takes.rq;
 
-import java.io.IOException;
 import org.takes.Request;
 
 /**
@@ -49,15 +48,15 @@ public interface RqForm extends Request {
      * Get single parameter.
      * @param name Parameter name
      * @return List of values (can be empty)
-     * @throws IOException if something fails reading parameters
+     * @throws Exception if something fails reading parameters
      */
-    Iterable<String> param(CharSequence name) throws IOException;
+    Iterable<String> param(CharSequence name) throws Exception;
 
     /**
      * Get all parameter names.
      * @return All names
-     * @throws IOException if something fails reading parameters
+     * @throws Exception if something fails reading parameters
      */
-    Iterable<String> names() throws IOException;
+    Iterable<String> names() throws Exception;
 
 }

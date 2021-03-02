@@ -93,7 +93,7 @@ public final class FtBasic implements Front {
     }
 
     @Override
-    public void start(final Exit exit) throws IOException {
+    public void start(final Exit exit) throws Exception {
         this.socket.setSoTimeout((int) TimeUnit.SECONDS.toMillis(1L));
         try {
             do {
@@ -107,9 +107,9 @@ public final class FtBasic implements Front {
     /**
      * Make a loop cycle.
      * @param server Server socket
-     * @throws IOException If fails
+     * @throws Exception If fails
      */
-    private void loop(final ServerSocket server) throws IOException {
+    private void loop(final ServerSocket server) throws Exception {
         try {
             this.back.accept(server.accept());
         } catch (final SocketTimeoutException ignored) {

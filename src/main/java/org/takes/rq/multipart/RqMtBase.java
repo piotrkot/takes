@@ -124,10 +124,10 @@ public final class RqMtBase implements RqMultipart {
     /**
      * Ctor.
      * @param req Original request
-     * @throws IOException If fails
+     * @throws Exception If fails
      * @checkstyle ExecutableStatementCountCheck (2 lines)
      */
-    public RqMtBase(final Request req) throws IOException {
+    public RqMtBase(final Request req) throws Exception {
         this.origin = req;
         this.stream = new RqLengthAware(req).body();
         this.buffer = ByteBuffer.allocate(
@@ -185,10 +185,10 @@ public final class RqMtBase implements RqMultipart {
      * Build a request for each part of the origin request.
      * @param req Origin request
      * @return The requests map that use the part name as a map key
-     * @throws IOException If fails
+     * @throws Exception If fails
      */
     private Map<String, List<Request>> requests(
-        final Request req) throws IOException {
+        final Request req) throws Exception {
         final String header = new RqHeaders.Smart(req).single("Content-Type");
         final Unchecked<Boolean> multipart = new Unchecked<>(
             new StartsWith(
@@ -247,10 +247,10 @@ public final class RqMtBase implements RqMultipart {
      * @param boundary Boundary
      * @param body Origin request body
      * @return Request
-     * @throws IOException If fails
+     * @throws Exception If fails
      */
     private Request make(final byte[] boundary,
-        final ReadableByteChannel body) throws IOException {
+        final ReadableByteChannel body) throws Exception {
         final File file = File.createTempFile(
             RqMultipart.class.getName(), ".tmp"
         );

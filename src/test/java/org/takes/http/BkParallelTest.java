@@ -50,7 +50,8 @@ import org.takes.tk.TkEmpty;
             "PMD.CyclomaticComplexity",
             "PMD.AvoidInstantiatingObjectsInLoops",
             "PMD.StdCyclomaticComplexity",
-            "PMD.ModifiedCyclomaticComplexity"
+            "PMD.ModifiedCyclomaticComplexity",
+            "PMD.AvoidCatchingGenericException"
         }
     )
 final class BkParallelTest {
@@ -102,7 +103,8 @@ final class BkParallelTest {
                             ),
                             socket
                         ).start(exit);
-                    } catch (final IOException ex) {
+                        // @checkstyle IllegalCatch (1 line)
+                    } catch (final Exception ex) {
                         throw new IllegalStateException(ex);
                     }
                 }

@@ -44,9 +44,9 @@ public final class RqMtSmart implements RqMultipart {
     /**
      * Ctor.
      * @param req Original
-     * @throws IOException If fails
+     * @throws Exception If fails
      */
-    public RqMtSmart(final Request req) throws IOException {
+    public RqMtSmart(final Request req) throws Exception {
         this(new RqMtBase(req));
     }
 

@@ -94,10 +94,10 @@ public final class RqMtSmartTest {
 
     /**
      * RqMtSmart can return correct part length.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void returnsCorrectPartLength() throws IOException {
+    public void returnsCorrectPartLength() throws Exception {
         final String post = "POST /post?u=3 HTTP/1.1";
         final int length = 5000;
         final String part = "x-1";
@@ -138,10 +138,10 @@ public final class RqMtSmartTest {
     /**
      * RqMtSmart can identify the boundary even if the last content to
      * read before the pattern is an empty line.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void identifiesBoundary() throws IOException {
+    public void identifiesBoundary() throws Exception {
         final int length = 9000;
         final String part = "foo-1";
         final String body =
@@ -188,7 +188,7 @@ public final class RqMtSmartTest {
         final String part = "f-1";
         final Take take = new Take() {
             @Override
-            public Response act(final Request req) throws IOException {
+            public Response act(final Request req) throws Exception {
                 return new RsText(
                     new RqPrint(
                         new RqMtSmart(
@@ -234,11 +234,11 @@ public final class RqMtSmartTest {
 
     /**
      * RqMtSmart can handle a big request in an acceptable time.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
     @Category(PerformanceTests.class)
-    public void handlesRequestInTime() throws IOException {
+    public void handlesRequestInTime() throws Exception {
         final int length = 100_000_000;
         final String part = "test";
         final File file = this.temp.newFile("handlesRequestInTime.tmp");
@@ -291,10 +291,10 @@ public final class RqMtSmartTest {
 
     /**
      * RqMtSmart doesn't distort the content.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void notDistortContent() throws IOException {
+    public void notDistortContent() throws Exception {
         final int length = 1_000_000;
         final String part = "test1";
         final File file = this.temp.newFile("notDistortContent.tmp");

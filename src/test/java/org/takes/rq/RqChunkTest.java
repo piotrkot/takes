@@ -23,7 +23,6 @@
  */
 package org.takes.rq;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
 import org.cactoos.text.Joined;
@@ -55,10 +54,10 @@ final class RqChunkTest {
 
     /**
      * RqChunk can read a one-chunk message.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    void readsOneChunk() throws IOException {
+    void readsOneChunk() throws Exception {
         final String data = "1234567890abcdef";
         final String length = Integer.toHexString(data.length());
         final InputStream stream = new RqChunk(
@@ -88,10 +87,10 @@ final class RqChunkTest {
 
     /**
      * RqChunk can read a chunk message.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    void readsManyChunks() throws IOException {
+    void readsManyChunks() throws Exception {
         final String first = "Takes is";
         final String second = "a true object-";
         final String third = "oriented framework";
@@ -128,10 +127,10 @@ final class RqChunkTest {
 
     /**
      * RqChunk accepts semi-colon and ignores parameters after a semi-colon.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    void ignoresParameterAfterSemiColon() throws IOException {
+    void ignoresParameterAfterSemiColon() throws Exception {
         final String data = "Build and Run";
         final String ignored = ";ignored-stuff";
         final String length = Integer.toHexString(data.length());

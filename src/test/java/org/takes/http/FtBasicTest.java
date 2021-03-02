@@ -119,7 +119,7 @@ final class FtBasicTest {
     void parsesIncomingHttpRequest() throws Exception {
         final Take take = new Take() {
             @Override
-            public Response act(final Request request) throws IOException {
+            public Response act(final Request request) throws Exception {
                 MatcherAssert.assertThat(
                     new RqPrint(request).printBody(),
                     Matchers.containsString("Jeff")
@@ -151,7 +151,7 @@ final class FtBasicTest {
     void gracefullyHandlesStuckBack() throws Exception {
         final Take take = new Take() {
             @Override
-            public Response act(final Request request) throws IOException {
+            public Response act(final Request request) throws Exception {
                 final Request req = new RqGreedy(request);
                 return new RsText(
                     String.format(
@@ -284,10 +284,10 @@ final class FtBasicTest {
 
     /**
      * FtBasic can work with broken pipe if {@link BkSafe} is used.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    void gracefullyHandlesBrokenPipe() throws IOException {
+    void gracefullyHandlesBrokenPipe() throws Exception {
         new FtBasic(
             new BkSafe(
                 new BkBasic(

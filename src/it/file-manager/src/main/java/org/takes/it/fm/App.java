@@ -24,7 +24,6 @@
 package org.takes.it.fm;
 
 import java.io.File;
-import java.io.IOException;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -59,9 +58,9 @@ public final class App implements Take {
     /**
      * Entry point.
      * @param args Arguments
-     * @throws IOException If fails
+     * @throws Exception If fails
      */
-    public static void main(final String... args) throws IOException {
+    public static void main(final String... args) throws Exception {
         new FtCli(
             new App(new File(System.getProperty("user.dir"))),
             args

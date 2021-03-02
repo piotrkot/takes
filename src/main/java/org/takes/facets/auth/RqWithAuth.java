@@ -23,7 +23,6 @@
  */
 package org.takes.facets.auth;
 
-import java.io.IOException;
 import lombok.EqualsAndHashCode;
 import org.cactoos.text.TextOf;
 import org.takes.Request;
@@ -49,18 +48,18 @@ public final class RqWithAuth extends RqWrap {
     /**
      * Ctor.
      * @param urn URN of the tester
-     * @throws IOException If fails
+     * @throws Exception If fails
      */
-    public RqWithAuth(final String urn) throws IOException {
+    public RqWithAuth(final String urn) throws Exception {
         this(new Identity.Simple(urn));
     }
 
     /**
      * Ctor.
      * @param identity Identity
-     * @throws IOException If fails
+     * @throws Exception If fails
      */
-    public RqWithAuth(final Identity identity) throws IOException {
+    public RqWithAuth(final Identity identity) throws Exception {
         this(identity, new RqFake());
     }
 
@@ -68,9 +67,9 @@ public final class RqWithAuth extends RqWrap {
      * Ctor.
      * @param urn URN of the tester
      * @param req Request
-     * @throws IOException If fails
+     * @throws Exception If fails
      */
-    public RqWithAuth(final String urn, final Request req) throws IOException {
+    public RqWithAuth(final String urn, final Request req) throws Exception {
         this(new Identity.Simple(urn), req);
     }
 
@@ -78,10 +77,10 @@ public final class RqWithAuth extends RqWrap {
      * Ctor.
      * @param identity Identity
      * @param req Request
-     * @throws IOException If fails
+     * @throws Exception If fails
      */
     public RqWithAuth(final Identity identity, final Request req)
-        throws IOException {
+        throws Exception {
         this(identity, TkAuth.class.getSimpleName(), req);
     }
 
@@ -90,10 +89,10 @@ public final class RqWithAuth extends RqWrap {
      * @param identity Identity
      * @param header Header name
      * @param req Request
-     * @throws IOException If fails
+     * @throws Exception If fails
      */
     public RqWithAuth(final Identity identity, final String header,
-        final Request req) throws IOException {
+        final Request req) throws Exception {
         super(RqWithAuth.make(identity, header, req));
     }
 
@@ -103,10 +102,10 @@ public final class RqWithAuth extends RqWrap {
      * @param header Header name
      * @param req Request
      * @return Request
-     * @throws IOException If fails
+     * @throws Exception If fails
      */
     private static Request make(final Identity identity, final String header,
-        final Request req) throws IOException {
+        final Request req) throws Exception {
         return new RqWithHeader(
             req,
             header,

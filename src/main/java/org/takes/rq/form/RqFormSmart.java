@@ -66,12 +66,12 @@ public final class RqFormSmart implements RqForm {
 
     @Override
     public Iterable<String> param(final CharSequence name)
-        throws IOException {
+        throws Exception {
         return this.origin.param(name);
     }
 
     @Override
-    public Iterable<String> names() throws IOException {
+    public Iterable<String> names() throws Exception {
         return this.origin.names();
     }
 
@@ -89,9 +89,9 @@ public final class RqFormSmart implements RqForm {
      * Get single param or throw HTTP exception.
      * @param name Name of query param
      * @return Value of it
-     * @throws IOException If fails
+     * @throws Exception If fails
      */
-    public String single(final CharSequence name) throws IOException {
+    public String single(final CharSequence name) throws Exception {
         final Iterator<String> params = this.param(name).iterator();
         if (!params.hasNext()) {
             throw new HttpException(
@@ -109,10 +109,10 @@ public final class RqFormSmart implements RqForm {
      * @param name Name of query param
      * @param def Default, if not found
      * @return Value of it
-     * @throws IOException if something fails reading parameters
+     * @throws Exception if something fails reading parameters
      */
     public String single(final CharSequence name, final String def)
-        throws IOException {
+        throws Exception {
         final String value;
         final Iterator<String> params = this.param(name).iterator();
         if (params.hasNext()) {

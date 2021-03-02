@@ -82,10 +82,10 @@ final class RqFakeTest {
 
     /**
      * RqFake can print body only once.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    void printsBodyOnlyOnce() throws IOException {
+    void printsBodyOnlyOnce() throws Exception {
         final String body = "the body text";
         final Request req = new RqFake("", "", body);
         MatcherAssert.assertThat(

@@ -23,7 +23,6 @@
  */
 package org.takes.rs;
 
-import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -93,10 +92,10 @@ public final class RsWithStatus extends RsWrap {
      * @param status Status
      * @param reason Reason
      * @return Head
-     * @throws IOException If fails
+     * @throws Exception If fails
      */
     private static Iterable<String> head(final Response origin,
-        final int status, final CharSequence reason) throws IOException {
+        final int status, final CharSequence reason) throws Exception {
         // @checkstyle MagicNumber (1 line)
         if (status < 100 || status > 999) {
             throw new IllegalArgumentException(

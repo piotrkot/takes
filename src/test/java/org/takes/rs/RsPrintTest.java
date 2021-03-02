@@ -49,10 +49,10 @@ public final class RsPrintTest {
 
     /**
      * RsPrint can fail on invalid chars.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test(expected = IllegalArgumentException.class)
-    public void failsOnInvalidHeader() throws IOException {
+    public void failsOnInvalidHeader() throws Exception {
         new RsPrint(new RsWithHeader("name", "\n\n\n")).asString();
     }
 
@@ -103,7 +103,7 @@ public final class RsPrintTest {
     }
 
     @Test
-    public void simple() throws IOException {
+    public void simple() throws Exception {
         final StringWriter writer = new StringWriter();
         new RsPrint(
             new RsSimple(new SetOf<>("HTTP/1.1 500 Internal Server Error"), "")
@@ -121,7 +121,7 @@ public final class RsPrintTest {
      * RFC 7230 says we shall support dashes in response first line.
      */
     @Test
-    public void simpleWithDash() throws IOException {
+    public void simpleWithDash() throws Exception {
         final StringWriter writer = new StringWriter();
         new RsPrint(
             new RsSimple(new IterableOf<>("HTTP/1.1 203 Non-Authoritative"), "")
@@ -137,10 +137,10 @@ public final class RsPrintTest {
 
     /**
      * RsPrint can flush head contents even when exception happens.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void flushHeadEvenWhenExceptionHappens() throws IOException {
+    public void flushHeadEvenWhenExceptionHappens() throws Exception {
         final IOException exception = new IOException("Error");
         final FailWriter writer = new FailWriter(exception);
         try {

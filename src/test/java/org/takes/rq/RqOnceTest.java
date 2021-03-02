@@ -23,7 +23,6 @@
  */
 package org.takes.rq;
 
-import java.io.IOException;
 import org.cactoos.io.InputStreamOf;
 import org.cactoos.iterable.IterableOf;
 import org.cactoos.text.Randomized;
@@ -41,10 +40,10 @@ public final class RqOnceTest {
 
     /**
      * RqOnce can make request read-only-once for header.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void makesRequestReadOnlyOnceAndCachesHead() throws IOException {
+    public void makesRequestReadOnlyOnceAndCachesHead() throws Exception {
         final Request req = new RqOnce(
             new RequestOf(
                 () -> new IterableOf<>(new Randomized().asString()),
@@ -62,10 +61,10 @@ public final class RqOnceTest {
 
     /**
      * RqOnce can make request read-only-once for body.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void makesRequestReadOnlyOnceAndCachesBody() throws IOException {
+    public void makesRequestReadOnlyOnceAndCachesBody() throws Exception {
         final Request req = new RqOnce(
             new RequestOf(
                 new IterableOf<>(new Randomized().asString()),

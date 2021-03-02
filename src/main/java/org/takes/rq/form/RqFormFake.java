@@ -56,12 +56,12 @@ public final class RqFormFake implements RqForm {
 
     @Override
     public Iterable<String> param(final CharSequence name)
-        throws IOException {
+        throws Exception {
         return this.fake.param(name);
     }
 
     @Override
-    public Iterable<String> names() throws IOException {
+    public Iterable<String> names() throws Exception {
         return this.fake.names();
     }
 

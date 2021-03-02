@@ -23,7 +23,6 @@
  */
 package org.takes.rs.xe;
 
-import java.io.IOException;
 import lombok.EqualsAndHashCode;
 import org.xembly.Directive;
 
@@ -51,7 +50,7 @@ public class XeWrap implements XeSource {
     }
 
     @Override
-    public final Iterable<Directive> toXembly() throws IOException {
+    public final Iterable<Directive> toXembly() throws Exception {
         return this.origin.toXembly();
     }
 }

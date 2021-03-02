@@ -23,7 +23,6 @@
  */
 package org.takes.facets.flash;
 
-import java.io.IOException;
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
 import java.util.Iterator;
@@ -81,7 +80,7 @@ public final class XeFlash implements XeSource {
     }
 
     @Override
-    public Iterable<Directive> toXembly() throws IOException {
+    public Iterable<Directive> toXembly() throws Exception {
         final Iterator<String> cookies =
             new RqCookies.Base(this.req).cookie(this.cookie).iterator();
         final Directives dirs = new Directives();
@@ -90,11 +89,11 @@ public final class XeFlash implements XeSource {
             if (matcher.find()) {
                 dirs.add("flash")
                     .add("message").set(
-                        URLDecoder.decode(
-                            matcher.group(1),
-                            Charset.defaultCharset().name()
-                        )
-                    ).up()
+                    URLDecoder.decode(
+                        matcher.group(1),
+                        Charset.defaultCharset().name()
+                    )
+                ).up()
                     .add("level").set(matcher.group(2));
             }
         }

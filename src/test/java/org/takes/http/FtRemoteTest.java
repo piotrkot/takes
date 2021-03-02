@@ -81,7 +81,7 @@ final class FtRemoteTest {
         final Take take = new Take() {
             @Override
             public Response act(final org.takes.Request req)
-                throws IOException {
+                throws Exception {
                 MatcherAssert.assertThat(
                     new RqFormBase(req).param("alpha"),
                     Matchers.hasItem("123")

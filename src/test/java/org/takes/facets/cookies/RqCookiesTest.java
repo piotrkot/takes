@@ -23,7 +23,6 @@
  */
 package org.takes.facets.cookies;
 
-import java.io.IOException;
 import java.util.Arrays;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -40,10 +39,10 @@ final class RqCookiesTest {
 
     /**
      * RqCookies can parse a query.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    void parsesHttpQuery() throws IOException {
+    void parsesHttpQuery() throws Exception {
         MatcherAssert.assertThat(
             new RqCookies.Base(
                 new RqBuffered(
@@ -63,10 +62,10 @@ final class RqCookiesTest {
 
     /**
      * RqCookies can parse a query with empty cookie.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    void parsesHttpQueryWithEmptyCookie() throws IOException {
+    void parsesHttpQueryWithEmptyCookie() throws Exception {
         MatcherAssert.assertThat(
             new RqCookies.Base(
                 new RqFake(
@@ -84,10 +83,10 @@ final class RqCookiesTest {
 
     /**
      * RqCookies can parse a request with multiple cookies.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    void parsesHttpRequestWithMultipleCookies() throws IOException {
+    void parsesHttpRequestWithMultipleCookies() throws Exception {
         MatcherAssert.assertThat(
             new RqCookies.Base(
                 new RqFake(

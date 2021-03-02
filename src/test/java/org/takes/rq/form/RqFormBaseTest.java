@@ -23,7 +23,6 @@
  */
 package org.takes.rq.form;
 
-import java.io.IOException;
 import java.util.Arrays;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -45,10 +44,10 @@ final class RqFormBaseTest {
 
     /**
      * RqFormBase can parse body.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    void parsesHttpBody() throws IOException {
+    void parsesHttpBody() throws Exception {
         final String body = "alpha=a+b+c&beta=%20Yes%20";
         final RqForm req = new RqFormBase(
             new RqBuffered(
@@ -77,10 +76,10 @@ final class RqFormBaseTest {
 
     /**
      * RqFormBase can return the same (cached) instances in every call.
-     * @throws IOException if fails
+     * @throws Exception if fails
      */
     @Test
-    void sameInstance() throws IOException {
+    void sameInstance() throws Exception {
         final RqForm req = new RqFormBase(
             new RqBuffered(
                 new RqFake(

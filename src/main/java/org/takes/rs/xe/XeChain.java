@@ -23,7 +23,6 @@
  */
 package org.takes.rs.xe;
 
-import java.io.IOException;
 import java.util.Arrays;
 import lombok.EqualsAndHashCode;
 import org.cactoos.Scalar;
@@ -73,7 +72,7 @@ public final class XeChain extends XeWrap {
         super(
             new XeSource() {
                 @Override
-                public Iterable<Directive> toXembly() throws IOException {
+                public Iterable<Directive> toXembly() throws Exception {
                     final Directives dirs = new Directives();
                     for (final XeSource src : new IoChecked<>(items).value()) {
                         dirs.push().append(src.toXembly()).pop();

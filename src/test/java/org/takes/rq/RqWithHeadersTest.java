@@ -23,7 +23,6 @@
  */
 package org.takes.rq;
 
-import java.io.IOException;
 import org.cactoos.text.Joined;
 import org.cactoos.text.TextOf;
 import org.hamcrest.MatcherAssert;
@@ -44,10 +43,10 @@ final class RqWithHeadersTest {
 
     /**
      * RqWithHeaders can add headers.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    void addsHeadersToRequest() throws IOException {
+    void addsHeadersToRequest() throws Exception {
         final String testheader = "TestHeader: someValue";
         final String someheader = "SomeHeader: testValue";
         MatcherAssert.assertThat(

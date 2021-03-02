@@ -23,7 +23,6 @@
  */
 package org.takes.rq;
 
-import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
@@ -36,10 +35,10 @@ final class RqWithoutHeaderTest {
 
     /**
      * RqWithoutHeader can remove a header.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    void removesHttpHeaders() throws IOException {
+    void removesHttpHeaders() throws Exception {
         MatcherAssert.assertThat(
             new RqPrint(
                 new RqWithoutHeader(

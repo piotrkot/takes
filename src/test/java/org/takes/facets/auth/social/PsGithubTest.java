@@ -123,7 +123,7 @@ public final class PsGithubTest {
                 "/login/oauth/access_token",
                 new Take() {
                     @Override
-                    public Response act(final Request req) throws IOException {
+                    public Response act(final Request req) throws Exception {
                         final Request greq = new RqGreedy(req);
                         final String code = "code";
                         PsGithubTest.assertParam(greq, code, code);
@@ -183,10 +183,10 @@ public final class PsGithubTest {
      * @param req Request
      * @param param Parameter name
      * @param value Parameter value
-     * @throws IOException  If some problem inside
+     * @throws Exception  If some problem inside
      */
     private static void assertParam(final Request req,
-        final CharSequence param, final String value)  throws IOException {
+        final CharSequence param, final String value)  throws Exception {
         MatcherAssert.assertThat(
             new RqFormSmart(new RqFormBase(req)).single(param),
             Matchers.equalTo(value)

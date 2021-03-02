@@ -87,9 +87,9 @@ public final class RqPrint extends RqWrap implements Text {
     /**
      * Print it all.
      * @return Text form of request
-     * @throws IOException If fails
+     * @throws Exception If fails
      */
-    public String print() throws IOException {
+    public String print() throws Exception {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         this.print(baos);
         return new TextOf(baos.toByteArray()).asString();
@@ -108,9 +108,9 @@ public final class RqPrint extends RqWrap implements Text {
     /**
      * Print it all.
      * @return Text form of request
-     * @throws IOException If fails
+     * @throws Exception If fails
      */
-    public String printHead() throws IOException {
+    public String printHead() throws Exception {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         this.printHead(baos);
         return new TextOf(baos.toByteArray()).asString();
@@ -136,9 +136,9 @@ public final class RqPrint extends RqWrap implements Text {
     /**
      * Print body.
      * @return Text form of request
-     * @throws IOException If fails
+     * @throws Exception If fails
      */
-    public String printBody() throws IOException {
+    public String printBody() throws Exception {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         this.printBody(baos);
         return new TextOf(baos.toByteArray()).asString();

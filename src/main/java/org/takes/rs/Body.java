@@ -52,10 +52,10 @@ interface Body extends Input {
     /**
      * Gives the length of the stream.
      * @return The length of the stream.
-     * @throws IOException in case the length of the stream could not be
+     * @throws Exception in case the length of the stream could not be
      *  retrieved.
      */
-    int length() throws IOException;
+    int length() throws Exception;
 
     /**
      * Content of a body based on an {@link java.net.URL}.

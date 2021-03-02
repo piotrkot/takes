@@ -23,7 +23,6 @@
  */
 package org.takes.rq.multipart;
 
-import java.io.IOException;
 import java.util.Arrays;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
@@ -78,10 +77,10 @@ public final class RqMtBaseTest {
 
     /**
      * RqMtBase can satisfy equals contract.
-     * @throws IOException if some problem inside
+     * @throws Exception if some problem inside
      */
     @Test
-    public void satisfiesEqualsContract() throws IOException {
+    public void satisfiesEqualsContract() throws Exception {
         final String body = "449 N Wolfe Rd, Sunnyvale, CA 94085";
         final String part = "t-1";
         final Request req = new RqMtFake(
@@ -116,10 +115,10 @@ public final class RqMtBaseTest {
 
     /**
      * RqMtBase can throw exception on no closing boundary found.
-     * @throws IOException if some problem inside
+     * @throws Exception if some problem inside
      */
-    @Test(expected = IOException.class)
-    public void throwsExceptionOnNoClosingBoundaryFound() throws IOException {
+    @Test(expected = Exception.class)
+    public void throwsExceptionOnNoClosingBoundaryFound() throws Exception {
         final String host = "Host: rtw.example.com";
         final String length = "Content-Length: 100007";
         final String posthead = "POST /h?a=4 HTTP/1.1";
@@ -146,10 +145,10 @@ public final class RqMtBaseTest {
 
     /**
      * RqMtBase can produce parts with Content-Length.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void producesPartsWithContentLength() throws IOException {
+    public void producesPartsWithContentLength() throws Exception {
         final String part = "t2";
         final String host = "Host: rtw.example.com.br";
         final String length = "Content-Length: 100008";

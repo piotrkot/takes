@@ -24,7 +24,6 @@
 package org.takes.rs;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import org.cactoos.io.InputStreamOf;
 import org.cactoos.text.Joined;
 import org.cactoos.text.TextOf;
@@ -44,10 +43,10 @@ public final class RsPrettyXmlTest {
 
     /**
      * RsPrettyXML can format response with XML body.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void formatsXmlBody() throws IOException {
+    public void formatsXmlBody() throws Exception {
         MatcherAssert.assertThat(
             new RsPrint(
                 new RsPrettyXml(
@@ -60,11 +59,11 @@ public final class RsPrettyXmlTest {
 
     /**
      * RsPrettyXML can format HTML5 markup with proper DOCTYPE.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
     // @checkstyle MethodNameCheck (1 line)
-    public void formatsHtml5DoctypeBody() throws IOException {
+    public void formatsHtml5DoctypeBody() throws Exception {
         MatcherAssert.assertThat(
             new RsPrint(
                 new RsPrettyXml(
@@ -80,11 +79,11 @@ public final class RsPrettyXmlTest {
     /**
      * RsPrettyXML can format HTML5 markup with DOCTYPE for
      * legacy browser support.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
     // @checkstyle MethodNameCheck (1 line)
-    public void formatsHtml5ForLegacyBrowsersDoctypeBody() throws IOException {
+    public void formatsHtml5ForLegacyBrowsersDoctypeBody() throws Exception {
         MatcherAssert.assertThat(
             new TextOf(
                 new RsPrint(
@@ -122,11 +121,11 @@ public final class RsPrettyXmlTest {
     /**
      * RsPrettyXML can format HTML4 markup with DOCTYPE with public
      * and system id.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
     // @checkstyle MethodNameCheck (1 line)
-    public void formatsHtml4DoctypeBody() throws IOException {
+    public void formatsHtml4DoctypeBody() throws Exception {
         final String pid = "PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" ";
         final String xhtml = "<html xmlns=\"http://www.w3.org/1999/xhtml\" "
             .concat("lang=\"en\">");
@@ -168,19 +167,19 @@ public final class RsPrettyXmlTest {
 
     /**
      * RsPrettyXML can format response with non XML body.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
-    @Test(expected = IOException.class)
-    public void formatsNonXmlBody() throws IOException {
+    @Test(expected = Exception.class)
+    public void formatsNonXmlBody() throws Exception {
         new RsPrint(new RsPrettyXml(new RsWithBody("foo"))).printBody();
     }
 
     /**
      * RsPrettyXML can report correct content length.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void reportsCorrectContentLength() throws IOException {
+    public void reportsCorrectContentLength() throws Exception {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         new RsPrint(
             new RsWithBody(

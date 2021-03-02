@@ -129,7 +129,7 @@ final class PsLinkedinTest {
         }
 
         @Override
-        public Response act(final Request req) throws IOException {
+        public Response act(final Request req) throws Exception {
             MatcherAssert.assertThat(
                 new RqPrint(req).printBody(),
                 Matchers.stringContainsInOrder(

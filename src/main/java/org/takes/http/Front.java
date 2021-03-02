@@ -23,8 +23,6 @@
  */
 package org.takes.http;
 
-import java.io.IOException;
-
 /**
  * HTTP front.
  *
@@ -37,8 +35,8 @@ public interface Front {
     /**
      * Start and dispatch all incoming sockets.
      * @param exit When to exit
-     * @throws IOException If fails
+     * @throws Exception If fails
      */
-    void start(Exit exit) throws IOException;
+    void start(Exit exit) throws Exception;
 
 }

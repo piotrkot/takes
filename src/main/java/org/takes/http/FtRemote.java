@@ -101,7 +101,7 @@ public final class FtRemote implements Front {
     }
 
     @Override
-    public void start(final Exit exit) throws IOException {
+    public void start(final Exit exit) throws Exception {
         this.origin.start(exit);
     }
 
@@ -110,6 +110,7 @@ public final class FtRemote implements Front {
      * @param script Script to run
      * @throws Exception If fails
      */
+    @SuppressWarnings("PMD.AvoidCatchingGenericException")
     public void exec(final FtRemote.Script script) throws Exception {
         final AtomicBoolean exit = new AtomicBoolean();
         final CountDownLatch latch = new CountDownLatch(1);
@@ -127,7 +128,8 @@ public final class FtRemote implements Front {
                                 }
                             }
                         );
-                    } catch (final IOException ex) {
+                        // @checkstyle IllegalCatch (1 line)
+                    } catch (final Exception ex) {
                         throw new IllegalStateException(ex);
                     }
                 }

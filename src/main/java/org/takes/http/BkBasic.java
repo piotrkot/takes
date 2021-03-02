@@ -24,13 +24,12 @@
 package org.takes.http;
 
 import java.io.BufferedOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.Socket;
 import lombok.EqualsAndHashCode;
-import org.cactoos.io.BytesOf;
+import org.cactoos.bytes.BytesOf;
 import org.cactoos.io.InputStreamOf;
 import org.takes.HttpException;
 import org.takes.Request;
@@ -90,7 +89,7 @@ public final class BkBasic implements Back {
 
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     @Override
-    public void accept(final Socket socket) throws IOException {
+    public void accept(final Socket socket) throws Exception {
         try (
             InputStream input = socket.getInputStream();
             BufferedOutputStream output = new BufferedOutputStream(
@@ -116,11 +115,11 @@ public final class BkBasic implements Back {
      * Print response to output stream, safely.
      * @param req Request
      * @param output Output
-     * @throws IOException If fails
+     * @throws Exception If fails
      */
     @SuppressWarnings("PMD.AvoidCatchingThrowable")
     private void print(final Request req, final OutputStream output)
-        throws IOException {
+        throws Exception {
         try {
             new RsPrint(this.take.act(req)).print(output);
         } catch (final HttpException ex) {

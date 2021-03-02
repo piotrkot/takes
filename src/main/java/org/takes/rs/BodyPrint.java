@@ -79,7 +79,7 @@ public final class BodyPrint implements Body, Text {
     }
 
     @Override
-    public String asString() throws IOException {
+    public String asString() throws Exception {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         this.print(baos);
         return new TextOf(baos.toByteArray()).asString();
@@ -91,7 +91,7 @@ public final class BodyPrint implements Body, Text {
     }
 
     @Override
-    public int length() throws IOException {
+    public int length() throws Exception {
         return this.asString().length();
     }
 }

@@ -90,7 +90,7 @@ public final class FtSecure implements Front {
     }
 
     @Override
-    public void start(final Exit exit) throws IOException {
+    public void start(final Exit exit) throws Exception {
         this.front.start(exit);
     }
 }

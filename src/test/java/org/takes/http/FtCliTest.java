@@ -26,7 +26,6 @@ package org.takes.http;
 import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.RestResponse;
 import java.io.File;
-import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.CountDownLatch;
@@ -57,6 +56,7 @@ public final class FtCliTest {
      * @throws Exception If some problem inside
      */
     @Test
+    @SuppressWarnings("PMD.AvoidCatchingGenericException")
     public void understandsCommandLineArgs() throws Exception {
         final CountDownLatch ready = new CountDownLatch(1);
         final Exit exit = new Exit() {
@@ -79,7 +79,8 @@ public final class FtCliTest {
                             "--threads=1",
                             "--lifetime=4000"
                         ).start(exit);
-                    } catch (final IOException ex) {
+                        // @checkstyle IllegalCatch (1 line)
+                    } catch (final Exception ex) {
                         throw new IllegalStateException(ex);
                     }
                 }

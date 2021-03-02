@@ -23,7 +23,6 @@
  */
 package org.takes.tk;
 
-import java.io.IOException;
 import java.util.Arrays;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
@@ -62,7 +61,7 @@ final class TkSslOnlyTest {
                     new Take() {
                         @Override
                         public Response act(final Request request)
-                            throws IOException {
+                            throws Exception {
                             return new RsText(
                                 new RqPrint(request).print()
                             );

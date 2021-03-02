@@ -24,7 +24,6 @@
 package org.takes.rq;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import org.cactoos.io.InputStreamOf;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
@@ -45,10 +44,10 @@ public final class RqLiveTest {
 
     /**
      * RqLive can build a request.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void buildsHttpRequest() throws IOException {
+    public void buildsHttpRequest() throws Exception {
         final Request req = new RqLive(
             new InputStreamOf(
                 new Joined(
@@ -73,10 +72,10 @@ public final class RqLiveTest {
 
     /**
      * RqLive can support multi-line headers.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void supportMultiLineHeaders() throws IOException {
+    public void supportMultiLineHeaders() throws Exception {
         final Request req = new RqLive(
             new InputStreamOf(
                 new Joined(
@@ -98,10 +97,10 @@ public final class RqLiveTest {
     /**
      * RqLive can support multi-line headers with colon in second line.
      * Yegor counterexample.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void supportMultiLineHeadersWithColon() throws IOException {
+    public void supportMultiLineHeadersWithColon() throws Exception {
         final Request req = new RqLive(
             new InputStreamOf(
                 new Joined(
@@ -121,10 +120,10 @@ public final class RqLiveTest {
 
     /**
      * RqLive can fail when request is broken.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
-    @Test(expected = IOException.class)
-    public void failsOnBrokenHttpRequest() throws IOException {
+    @Test(expected = Exception.class)
+    public void failsOnBrokenHttpRequest() throws Exception {
         new RqLive(
             new ByteArrayInputStream(
                 "GET /test HTTP/1.1\r\nHost: \u20ac".getBytes()
@@ -134,10 +133,10 @@ public final class RqLiveTest {
 
     /**
      * RqLive can fail when request is broken.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
-    @Test(expected = IOException.class)
-    public void failsOnInvalidCrLfInRequest() throws IOException {
+    @Test(expected = Exception.class)
+    public void failsOnInvalidCrLfInRequest() throws Exception {
         new RqLive(
             new ByteArrayInputStream(
                 "GET /test HTTP/1.1\rHost: localhost".getBytes()

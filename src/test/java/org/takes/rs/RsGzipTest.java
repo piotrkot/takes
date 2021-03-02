@@ -46,10 +46,10 @@ final class RsGzipTest {
 
     /**
      * RsGzip can build a compressed response.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    void makesCompressedResponse() throws IOException {
+    void makesCompressedResponse() throws Exception {
         final String text = "some unicode text: \u20ac\n\t";
         final Response response = new RsGzip(new RsText(text));
         MatcherAssert.assertThat(
@@ -90,10 +90,10 @@ final class RsGzipTest {
 
     /**
      * RsGzip can report correct content length.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    void reportsCorrectContentLength() throws IOException {
+    void reportsCorrectContentLength() throws Exception {
         final String text = "some text to encode";
         final Response response = new RsGzip(new RsText(text));
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();

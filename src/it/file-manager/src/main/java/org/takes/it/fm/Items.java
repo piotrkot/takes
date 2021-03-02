@@ -24,7 +24,6 @@
 package org.takes.it.fm;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Collection;
 import java.util.LinkedList;
 import org.takes.rs.xe.XeChain;
@@ -54,7 +53,7 @@ final class Items implements XeSource {
 
     @Override
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
-    public Iterable<Directive> toXembly() throws IOException {
+    public Iterable<Directive> toXembly() throws Exception {
         final Collection<XeSource> items = new LinkedList<>();
         final File[] files = this.home.listFiles();
         if (files != null) {

@@ -26,7 +26,6 @@ package org.takes.http;
 import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.RestResponse;
 import java.io.File;
-import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.CountDownLatch;
@@ -60,6 +59,7 @@ public final class BkTimeableTest {
      * @throws java.lang.Exception If some problem inside
      */
     @Test
+    @SuppressWarnings("PMD.AvoidCatchingGenericException")
     public void stopsLongRunningBack() throws Exception {
         final String response = "interrupted";
         final CountDownLatch ready = new CountDownLatch(1);
@@ -99,7 +99,8 @@ public final class BkTimeableTest {
                             "--lifetime=4000",
                             "--max-latency=100"
                         ).start(exit);
-                    } catch (final IOException ex) {
+                        // @checkstyle IllegalCatch (1 line)
+                    } catch (final Exception ex) {
                         throw new IllegalStateException(ex);
                     }
                 }

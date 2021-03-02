@@ -36,7 +36,7 @@ import java.net.Socket;
 import java.net.URI;
 import java.util.Collections;
 import java.util.concurrent.atomic.AtomicReference;
-import org.cactoos.io.BytesOf;
+import org.cactoos.bytes.BytesOf;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -67,7 +67,8 @@ import org.takes.tk.TkText;
 @SuppressWarnings(
     {
         "PMD.ExcessiveImports",
-        "PMD.TooManyMethods"
+        "PMD.TooManyMethods",
+        "PMD.AvoidCatchingGenericException"
     })
 final class BkBasicTest {
 
@@ -204,7 +205,8 @@ final class BkBasicTest {
                             new BkBasic(new TkText(text)).accept(
                                 server.accept()
                             );
-                        } catch (final IOException exception) {
+                            // @checkstyle IllegalCatch (1 line)
+                        } catch (final Exception exception) {
                             throw new IllegalStateException(exception);
                         }
                     }
@@ -267,7 +269,8 @@ final class BkBasicTest {
                             new BkBasic(new TkText("411 Test")).accept(
                                 server.accept()
                             );
-                        } catch (final IOException exception) {
+                            // @checkstyle IllegalCatch (1 line)
+                        } catch (final Exception exception) {
                             throw new IllegalStateException(exception);
                         }
                     }
@@ -324,7 +327,8 @@ final class BkBasicTest {
                             new BkBasic(new TkText(text)).accept(
                                 server.accept()
                             );
-                        } catch (final IOException exception) {
+                            // @checkstyle IllegalCatch (1 line)
+                        } catch (final Exception exception) {
                             throw new IllegalStateException(exception);
                         }
                     }
@@ -396,7 +400,8 @@ final class BkBasicTest {
                                 ).accept(
                                     server.accept()
                                 );
-                            } catch (final IOException exception) {
+                                // @checkstyle IllegalCatch (1 line)
+                            } catch (final Exception exception) {
                                 throw new IllegalStateException(exception);
                             }
                         }

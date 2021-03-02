@@ -50,9 +50,9 @@ public final class RqLive extends RqWrap {
     /**
      * Ctor.
      * @param input Input stream
-     * @throws IOException If fails
+     * @throws Exception If fails
      */
-    public RqLive(final InputStream input) throws IOException {
+    public RqLive(final InputStream input) throws Exception {
         super(RqLive.parse(input));
     }
 
@@ -60,11 +60,11 @@ public final class RqLive extends RqWrap {
      * Parse input stream.
      * @param input Input stream
      * @return Request
-     * @throws IOException If fails
+     * @throws Exception If fails
      * @checkstyle ExecutableStatementCountCheck (100 lines)
      */
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
-    private static Request parse(final InputStream input) throws IOException {
+    private static Request parse(final InputStream input) throws Exception {
         boolean eof = true;
         final Collection<String> head = new LinkedList<>();
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -101,11 +101,11 @@ public final class RqLive extends RqWrap {
      * @param input The input stream to read
      * @param baos Current read header
      * @param position Header line number
-     * @throws IOException If the next byte is not a Line Feed as expected
+     * @throws Exception If the next byte is not a Line Feed as expected
      */
     private static void checkLineFeed(final InputStream input,
         final ByteArrayOutputStream baos, final Integer position)
-        throws IOException {
+        throws Exception {
         if (input.read() != '\n') {
             throw new HttpException(
                 HttpURLConnection.HTTP_BAD_REQUEST,
@@ -146,11 +146,11 @@ public final class RqLive extends RqWrap {
      * @param baos Byte stream containing read header
      * @param position Header line number
      * @return A legal character
-     * @throws IOException if character is illegal
+     * @throws Exception if character is illegal
      */
     private static Integer legalCharacter(final Opt<Integer> data,
         final ByteArrayOutputStream baos, final Integer position)
-        throws IOException {
+        throws Exception {
         // @checkstyle MagicNumber (1 line)
         if ((data.get() > 0x7f || data.get() < 0x20)
             && data.get() != '\t') {

@@ -25,7 +25,6 @@ package org.takes.rs.xe;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.util.Arrays;
@@ -127,10 +126,10 @@ public final class RsXembly extends RsWrap {
      * @param dom DOM node to build upon
      * @param src Source
      * @return XML
-     * @throws IOException If fails
+     * @throws Exception If fails
      */
     private static InputStream render(final Node dom,
-        final XeSource src) throws IOException {
+        final XeSource src) throws Exception {
         final Node copy = cloneNode(dom);
         final ByteArrayOutputStream baos =
             new ByteArrayOutputStream();

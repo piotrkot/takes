@@ -68,7 +68,7 @@ public final class RsPrint extends RsWrap implements Text {
     }
 
     @Override
-    public String asString() throws IOException {
+    public String asString() throws Exception {
         return new Joined(
             new TextOf(""),
             this.head,
@@ -79,32 +79,32 @@ public final class RsPrint extends RsWrap implements Text {
     /**
      * Print body into string.
      * @return Entire body of HTTP response
-     * @throws IOException If fails
+     * @throws Exception If fails
      */
-    public String printBody() throws IOException {
+    public String printBody() throws Exception {
         return this.body.asString();
     }
 
     /**
      * Print head into string.
      * @return Entire head of HTTP response
-     * @throws IOException If fails
+     * @throws Exception If fails
      * @since 0.10
      */
-    public String printHead() throws IOException {
+    public String printHead() throws Exception {
         return this.head.asString();
     }
 
     /**
      * Print it into output stream.
      * @param output Output to print into
-     * @throws IOException If fails
+     * @throws Exception If fails
      * @todo #1054:30min Remove the #print(OutputStream) methods.
      *  After the creation of {@link HeadPrint} and {@link BodyPrint} classes,
      *  these methods lost sense and need be removed from these classes and
      *  all tests that uses #print() method.
      */
-    public void print(final OutputStream output) throws IOException {
+    public void print(final OutputStream output) throws Exception {
         this.head.print(output);
         this.body.print(output);
     }
@@ -112,20 +112,20 @@ public final class RsPrint extends RsWrap implements Text {
     /**
      * Print it into output stream in UTF8.
      * @param output Output to print into
-     * @throws IOException If fails
+     * @throws Exception If fails
      * @since 0.10
      */
-    public void printHead(final OutputStream output) throws IOException {
+    public void printHead(final OutputStream output) throws Exception {
         this.head.print(output);
     }
 
     /**
      * Print it into a writer.
      * @param writer Writer to print into
-     * @throws IOException If fails
+     * @throws Exception If fails
      * @since 2.0
      */
-    public void printHead(final Writer writer) throws IOException {
+    public void printHead(final Writer writer) throws Exception {
         try {
             writer.write(this.head.asString());
         } finally {

@@ -146,7 +146,7 @@ public final class PsGoogleTest {
                 // @checkstyle AnonInnerLengthCheck (1 line)
                 new Take() {
                     @Override
-                    public Response act(final Request req) throws IOException {
+                    public Response act(final Request req) throws Exception {
                         MatcherAssert.assertThat(
                             new RqPrint(req).printHead(),
                             Matchers.containsString(
@@ -222,7 +222,7 @@ public final class PsGoogleTest {
                 // @checkstyle AnonInnerLengthCheck (1 line)
                 new Take() {
                     @Override
-                    public Response act(final Request req) throws IOException {
+                    public Response act(final Request req) throws Exception {
                         MatcherAssert.assertThat(
                             new RqPrint(req).printHead(),
                             Matchers.containsString(
@@ -274,7 +274,7 @@ public final class PsGoogleTest {
                 // @checkstyle AnonInnerLengthCheck (1 line)
                 new Take() {
                     @Override
-                    public Response act(final Request req) throws IOException {
+                    public Response act(final Request req) throws Exception {
                         MatcherAssert.assertThat(
                             new RqPrint(req).printHead(),
                             Matchers.containsString(
@@ -345,7 +345,7 @@ public final class PsGoogleTest {
             // @checkstyle AnonInnerLengthCheck (1 line)
             new Take() {
                 @Override
-                public Response act(final Request req) throws IOException {
+                public Response act(final Request req) throws Exception {
                     MatcherAssert.assertThat(
                         new RqPrint(req).printHead(),
                         Matchers.containsString("POST /o/oauth2/token")
@@ -396,10 +396,10 @@ public final class PsGoogleTest {
      * @param req Request
      * @param param Parameter name
      * @param value Parameter value
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     private static void assertParam(final Request req,
-        final CharSequence param, final String value) throws IOException {
+        final CharSequence param, final String value) throws Exception {
         MatcherAssert.assertThat(
             new RqFormSmart(new RqFormBase(req)).single(param),
             Matchers.equalTo(value)

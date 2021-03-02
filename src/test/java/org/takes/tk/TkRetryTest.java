@@ -68,7 +68,7 @@ public final class TkRetryTest {
      *
      * @throws Exception if something is wrong
      */
-    @Test(expected = IOException.class)
+    @Test(expected = Exception.class)
     public void retriesOnExceptionTillCount() throws Exception {
         final int count = Tv.THREE;
         final int delay = Tv.THOUSAND;

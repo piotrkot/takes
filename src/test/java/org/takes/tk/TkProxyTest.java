@@ -61,7 +61,7 @@ public final class TkProxyTest {
      */
     private static final Take ECHO = new Take() {
         @Override
-        public Response act(final Request req) throws IOException {
+        public Response act(final Request req) throws Exception {
             return new RsText(new RqPrint(req).print());
         }
     };

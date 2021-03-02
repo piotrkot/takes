@@ -23,7 +23,6 @@
  */
 package org.takes.rs.xe;
 
-import java.io.IOException;
 import java.util.Collections;
 import org.xembly.Directive;
 
@@ -49,8 +48,8 @@ public interface XeSource {
     /**
      * Get Xembly directives.
      * @return Directives
-     * @throws IOException If fails
+     * @throws Exception If fails
      */
-    Iterable<Directive> toXembly() throws IOException;
+    Iterable<Directive> toXembly() throws Exception;
 
 }

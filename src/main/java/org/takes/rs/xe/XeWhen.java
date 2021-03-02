@@ -204,7 +204,7 @@ public final class XeWhen extends XeWrap {
         super(
             new XeSource() {
                 @Override
-                public Iterable<Directive> toXembly() throws IOException {
+                public Iterable<Directive> toXembly() throws Exception {
                     final Iterable<Directive> dirs;
                     if (new IoChecked<>(condition).value()) {
                         dirs = new IoChecked<>(positive).value().toXembly();

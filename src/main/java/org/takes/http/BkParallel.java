@@ -23,7 +23,6 @@
  */
 package org.takes.http;
 
-import java.io.IOException;
 import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -74,6 +73,7 @@ public final class BkParallel extends BkWrap {
      * @param svc Executor service
      * @since 0.9
      */
+    @SuppressWarnings("PMD.AvoidCatchingGenericException")
     public BkParallel(final Back back, final ExecutorService svc) {
         super(
             new Back() {
@@ -85,7 +85,8 @@ public final class BkParallel extends BkWrap {
                             public void run() {
                                 try {
                                     back.accept(socket);
-                                } catch (final IOException ex) {
+                                    // @checkstyle IllegalCatch (1 line)
+                                } catch (final Exception ex) {
                                     throw new IllegalStateException(ex);
                                 }
                             }

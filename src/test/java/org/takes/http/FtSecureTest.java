@@ -101,7 +101,7 @@ final class FtSecureTest {
     void parsesIncomingHttpRequest() throws Exception {
         final Take take = new Take() {
             @Override
-            public Response act(final Request request) throws IOException {
+            public Response act(final Request request) throws Exception {
                 MatcherAssert.assertThat(
                     new RqPrint(request).printBody(),
                     Matchers.containsString("Jeff")

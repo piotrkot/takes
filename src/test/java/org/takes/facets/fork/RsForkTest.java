@@ -23,7 +23,6 @@
  */
 package org.takes.facets.fork;
 
-import java.io.IOException;
 import java.util.Arrays;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -41,10 +40,10 @@ final class RsForkTest {
 
     /**
      * RsFork can route by the Accept header.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    void negotiatesContent() throws IOException {
+    void negotiatesContent() throws Exception {
         final Request req = new RqFake(
             Arrays.asList(
                 "GET /hello.html",
@@ -67,10 +66,10 @@ final class RsForkTest {
 
     /**
      * RsFork can route without Accept header.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    void negotiatesContentWithoutAccept() throws IOException {
+    void negotiatesContentWithoutAccept() throws Exception {
         MatcherAssert.assertThat(
             new RsPrint(
                 new RsFork(
@@ -84,10 +83,10 @@ final class RsForkTest {
 
     /**
      * RsFork can route by the Accept header.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    void negotiatesContentWithComplexHeader() throws IOException {
+    void negotiatesContentWithComplexHeader() throws Exception {
         final Request req = new RqFake(
             Arrays.asList(
                 "GET /hell-1o.html",
@@ -111,10 +110,10 @@ final class RsForkTest {
 
     /**
      * RsFork can dispatch by request method.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    void dispatchesByRequestMethod() throws IOException {
+    void dispatchesByRequestMethod() throws Exception {
         MatcherAssert.assertThat(
             new RsPrint(
                 new RsFork(
