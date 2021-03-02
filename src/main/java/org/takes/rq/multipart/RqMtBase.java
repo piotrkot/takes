@@ -306,6 +306,9 @@ public final class RqMtBase implements RqMultipart {
                 if (data == boundary[match]) {
                     ++match;
                 } else if (data == boundary[0]) {
+                    if (match != 0) {
+                        btarget.limit(this.buffer.position() - offset - 1);
+                    }
                     match = 1;
                 } else {
                     match = 0;
